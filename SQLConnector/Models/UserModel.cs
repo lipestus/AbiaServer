@@ -4,20 +4,28 @@ using System.Collections;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace MySQLConnector.Models
+namespace SQLConnector.Models
 {
-    internal class UserModel
+    public class UserModel
     {
         public int Id { get; set; }
         public string AccountName { get; set; }
         public byte[] HashedPassword { get; set; }
 
+        public UserModel(string accountName, string password)
+        {
+            AccountName = accountName;
+            HashedPassword = HashPassword(password);
+        }
+
         private byte[] HashPassword(string password)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
             {
+                DegreeOfParallelism = 1,
+                MemorySize = 1024 * 1024,
+                Iterations = 2,
                 Salt = GenerateSalt()
             };
             return argon2.GetBytes(16);

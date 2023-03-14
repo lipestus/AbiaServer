@@ -3,10 +3,8 @@ using System;
 
 namespace AbiaServer.models
 {
-    public class User
+    public class TempUser
     {
-        public String accountName { get; set; }
-        public String password { get; set; }
         public IClient client { get; set; }
     }
 }

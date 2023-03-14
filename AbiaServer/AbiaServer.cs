@@ -5,6 +5,12 @@ using AbiaServerModels;
 using AbiaServerModels.NetworkData;
 using System.Collections.Generic;
 using AbiaServer.models;
+using System.Reflection;
+using System.IO;
+using SQLConnector.DbAccess;
+using SQLConnector.Data;
+using SQLConnector.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace AbiaServer
 {
@@ -12,12 +18,44 @@ namespace AbiaServer
     {
         public override bool ThreadSafe => false;
         public override Version Version => new Version(1, 0, 0);
-        public Dictionary<int, User> clientIDToPlayer = new Dictionary<int, User>();
+        public Dictionary<int, TempUser> clientIDToPlayer = new Dictionary<int, TempUser>();
+
+        private ISqlDataAccess _db;
+        private UserData _userData;
+        private string _connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AbiaServerDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
         public AbiaServer(PluginLoadData pluginLoadData) : base(pluginLoadData)
         {
-            Console.WriteLine("Server is listening...");
+            try
+            {
+                InitialiseConfigBuilder();
+            }
+            catch (Exception ex)
+            {
+                // Log the exception using the Logger class
+                Logger.Error($"An exception occurred: {ex.Message}", ex);
+            }
+
+            InitialiseListeners();
+        }
+
+        private void InitialiseConfigBuilder()
+        {
+            var config = new ConfigurationBuilder()
+                 .AddInMemoryCollection(new Dictionary<string, string>
+                 {
+                    { "ConnectionStrings:MyConnectionString", _connectionString }
+                 })
+                 .Build();
+            _db = new SqlDataAccess(config);
+            _userData = new UserData(_db);
+        }
+
+        private void InitialiseListeners()
+        {
             ClientManager.ClientConnected += ClientManager_ClientConnected;
             ClientManager.ClientDisconnected += ClientManager_ClientDisconnected;
+            AppDomain.CurrentDomain.AssemblyResolve += CurrentDomain_AssemblyResolve;
+            Console.WriteLine("Server is listening...");
         }
 
         private void ClientManager_ClientConnected(object sender, ClientConnectedEventArgs e)
@@ -43,16 +81,14 @@ namespace AbiaServer
                     Chat chat = reader.ReadSerializable<Chat>();
                     Console.WriteLine(chat.chatMessage);
                     break;
-                case (ushort)Tags.TagType.USER_LOGIN:
+                case (ushort)Tags.TagType.CREATE_USER:
                     UserLogin userLogin = reader.ReadSerializable<UserLogin>();
                     if (clientIDToPlayer.ContainsKey(e.Client.ID))
                     {
-                        User user = clientIDToPlayer[e.Client.ID];
-                        user.accountName = userLogin.accountName;
-                        // pass the password here as well
+                        UserModel userModel = new UserModel(userLogin.accountName, userLogin.password);
+                        _userData.InsertUser(userModel);
+                        Console.WriteLine($"User created : {userModel.AccountName}");
                     }
-
-                    //OutputConnectedPlayers(clientIDToPlayer);
                     break;
             }
         }
@@ -61,7 +97,7 @@ namespace AbiaServer
         {
             if (!clientIDToPlayer.ContainsKey(e.Client.ID))
             {
-                User user = new User();
+                TempUser user = new TempUser();
                 user.client = e.Client;
                 clientIDToPlayer.Add(e.Client.ID, user);
             }
@@ -73,16 +109,16 @@ namespace AbiaServer
                 clientIDToPlayer.Remove(e.Client.ID);
         }
 
-        private void OutputConnectedPlayers(Dictionary<int, User> users)
+        private Assembly CurrentDomain_AssemblyResolve(object sender, ResolveEventArgs args)
         {
-            Console.WriteLine("---------------------------");
-            Console.WriteLine($"{users.Count} users");
-            foreach (KeyValuePair<int, User> pair in users)
+            var assemblyName = new AssemblyName(args.Name).Name;
+            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            var assemblyPath = Path.Combine(dir, $"{assemblyName}.dll");
+            if (File.Exists(assemblyPath))
             {
-                Console.WriteLine(pair.Key.ToString() + ": " + pair.Value.accountName);
+                return Assembly.LoadFrom(assemblyPath);
             }
-            Console.WriteLine("---------------------------");
+            return null;
         }
-
     }
 }

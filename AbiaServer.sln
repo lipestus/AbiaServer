@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AbiaServerModels", "AbiaSer
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "UserDB", "UserDB\UserDB.sqlproj", "{E70E669F-F003-4426-9CDC-EAFEC80169E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySQLConnector", "MySQLConnector\MySQLConnector.csproj", "{3663BCB4-565C-4A9B-A325-59DA0ECD4095}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLConnector", "SQLConnector\SQLConnector.csproj", "{3663BCB4-565C-4A9B-A325-59DA0ECD4095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
