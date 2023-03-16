@@ -51,8 +51,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NetworkData\CreateAccountResponse.cs" />
     <Compile Include="NetworkData\Chat.cs" />
-    <Compile Include="NetworkData\UserLogin.cs" />
+    <Compile Include="NetworkData\CreateAccountRequest.cs" />
+    <Compile Include="NetworkData\LoginRequest.cs" />
+    <Compile Include="NetworkData\LoginResponse.cs" />
     <Compile Include="Tags.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -63,7 +66,7 @@
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(SolutionDir)AbiaServerModels\bin\Debug\AbiaServerModels.dll" "C:\Users\lipes\Abia\Assets\Plugins"
-xcopy /y "$(SolutionDir)AbiaServerModels\bin\Debug\AbiaServerModels.dll" "C:\Users\lipes\Abia\Server\Plugins"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)AbiaServerModels\bin\Debug\AbiaServerModels.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Assets\Plugins"
+xcopy /y "$(SolutionDir)AbiaServerModels\bin\Debug\AbiaServerModels.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Plugins"</PostBuildEvent>
   </PropertyGroup>
 </Project>

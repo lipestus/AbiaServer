@@ -3,7 +3,7 @@ using System;
 
 namespace AbiaServerModels.NetworkData
 {
-    public class UserLogin : IDarkRiftSerializable
+    public class CreateAccountRequest : IDarkRiftSerializable
     {
         public int Id { get; set; }
         public String accountName { get; set; }

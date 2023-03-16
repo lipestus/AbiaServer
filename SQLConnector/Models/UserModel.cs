@@ -4,6 +4,7 @@ using System.Collections;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace SQLConnector.Models
 {
@@ -12,21 +13,34 @@ namespace SQLConnector.Models
         public int Id { get; set; }
         public string AccountName { get; set; }
         public byte[] HashedPassword { get; set; }
-
+        public bool IsAccountNameValid { get; set; }
+        public byte[] Salt { get; set; }
+        public UserModel() { }
         public UserModel(string accountName, string password)
         {
-            AccountName = accountName;
-            HashedPassword = HashPassword(password);
+            if (Regex.IsMatch(accountName, @"^(?!.*\b(asshole|fuck|shit|cunt|whore|nigger|retard)).+$", RegexOptions.IgnoreCase))
+            {
+                AccountName = accountName;
+                IsAccountNameValid = true;
+            }
+            else
+            {
+                IsAccountNameValid = false;
+                AccountName = null;
+            }
+
+            Salt = GenerateSalt();
+            HashedPassword = HashPassword(password, Salt);
         }
 
-        private byte[] HashPassword(string password)
+        private byte[] HashPassword(string password, byte[] salt)
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
             {
                 DegreeOfParallelism = 1,
-                MemorySize = 1024 * 1024,
+                MemorySize = 32768,
                 Iterations = 2,
-                Salt = GenerateSalt()
+                Salt = salt
             };
             return argon2.GetBytes(16);
         }
@@ -45,7 +59,10 @@ namespace SQLConnector.Models
         {
             var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password))
             {
-                Salt = HashedPassword.Take(16).ToArray()
+                DegreeOfParallelism = 1,
+                MemorySize = 32768,
+                Iterations = 2,
+                Salt = Salt
             };
             var hashedBytes = argon2.GetBytes(16);
             return StructuralComparisons.StructuralEqualityComparer.Equals(hashedBytes, HashedPassword);

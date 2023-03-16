@@ -8,12 +8,12 @@ namespace AbiaServerModels
 {
     public class Tags
     {
-        public enum TagType
+        public enum MessageTypes : ushort
         {
-            CREATE_USER = 0,
-            USER_LOGIN = 1,
-            MESSAGE = 4,
-            TEST = 5
+            CreateAccountRequest = 1,
+            CreateAccountResponse = 2,
+            LoginRequest = 3,
+            LoginResponse = 4
         }
     }
 }
