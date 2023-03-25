@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[worlds]
+(
+	[id] INT IDENTITY(1,1) PRIMARY KEY, 
+	[name] NVARCHAR(32) NOT NULL, 
+	[ip] BIGINT NOT NULL DEFAULT 0, 
+	[port] INT NOT NULL
+)

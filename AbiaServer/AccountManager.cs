@@ -70,14 +70,17 @@ namespace AbiaServer
             }
 
             // Check if the account exists
-            UserModel userModel = await _userData.GetUserByName(loginRequest.AccountName);
+            UserModel userFromDB = await _userData.GetUserByName(loginRequest.AccountName);
 
-            if (userModel != null)
+            if (userFromDB != null)
             {
-                UserModel existentUser = new UserModel(userModel.AccountName, loginRequest.Password);
+                UserModel existentUser = new UserModel(userFromDB.AccountName, loginRequest.Password);
                 if (existentUser.VerifyPassword(loginRequest.Password))
                 {
-                    var successResponse = DarkRift.Message.Create((ushort)Tags.MessageTypes.LoginResponse, new LoginResponse { Success = true });
+                    var successResponse = DarkRift.Message.Create((ushort)Tags.MessageTypes.LoginResponse, new LoginResponse 
+                    {   Id = userFromDB.Id,
+                        Success = true 
+                    });
                     e.Client.SendMessage(successResponse, SendMode.Reliable);
                 }
                 else

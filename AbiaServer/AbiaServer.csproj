@@ -112,6 +112,7 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="WorldManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AbiaServerModels\AbiaServerModels.csproj">
@@ -167,18 +168,18 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\AbiaServer.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Plugins"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\AbiaServer.pdb" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Plugins"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Primitives.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.Json.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.FileExtensions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileProviders.Physical.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileSystemGlobbing.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Newtonsoft.Json.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)AbiaServer\appsettings.json" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\AbiaServer.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Plugins"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\AbiaServer.pdb" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Plugins"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.Abstractions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Primitives.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.Json.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileProviders.Abstractions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.Configuration.FileExtensions.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileProviders.Physical.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Microsoft.Extensions.FileSystemGlobbing.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\bin\Debug\Newtonsoft.Json.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)AbiaServer\appsettings.json" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer"</PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

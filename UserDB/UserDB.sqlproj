@@ -60,10 +60,10 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\StoredProcedures\User" />
+    <Folder Include="dbo\StoredProcedures\World" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\User.sql" />
-    <Build Include="dbo\Tables\UserCharacters.sql" />
     <Build Include="dbo\StoredProcedures\User\spUser_Get.sql" />
     <Build Include="dbo\StoredProcedures\User\spUser_GetAll.sql" />
     <Build Include="dbo\StoredProcedures\User\spUser_Delete.sql" />
@@ -71,6 +71,8 @@
     <Build Include="dbo\StoredProcedures\User\spUser_Update.sql" />
     <Build Include="dbo\StoredProcedures\User\spUser_GetByLogin.sql" />
     <Build Include="dbo\StoredProcedures\User\spUser_GetUserName.sql" />
+    <Build Include="dbo\Tables\World.sql" />
+    <Build Include="dbo\StoredProcedures\World\spWorld_GetAll.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />

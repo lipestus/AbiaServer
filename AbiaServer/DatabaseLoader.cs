@@ -13,6 +13,7 @@ namespace AbiaServer
     {
         public ISqlDataAccess Db { get; private set; }
         public UserData UserData { get; private set; }
+        public WorldData WorldData { get; private set; }
         private IConfigurationRoot _config;
 
         public DatabaseLoader(IConfigurationRoot config)
@@ -26,6 +27,7 @@ namespace AbiaServer
             Db = new SqlDataAccess(_config);
             Db.OnDatabaseError += OnDatabaseError;
             UserData = new UserData(Db);
+            WorldData = new WorldData(Db);
         }
 
         private void OnDatabaseError(string errorMessage)

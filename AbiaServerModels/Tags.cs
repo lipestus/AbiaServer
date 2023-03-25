@@ -13,7 +13,11 @@ namespace AbiaServerModels
             CreateAccountRequest = 1,
             CreateAccountResponse = 2,
             LoginRequest = 3,
-            LoginResponse = 4
+            LoginResponse = 4,
+
+            // World related
+            WorldRequest = 21,
+            WorldResponse = 22,
         }
     }
 }

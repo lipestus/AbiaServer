@@ -1,13 +1,6 @@
-﻿--if not exists (select 1 from dbo.[User])
---BEGIN
---    DECLARE @HashedPassword varbinary(max)
---    DECLARE @Salt varbinary(16)
-
---    SET @HashedPassword = CONVERT(varbinary(max), 'felipe123')
-
---    -- Set the salt value (this will be passed as a parameter)
---    SET @Salt = @Salt
-
---    INSERT INTO dbo.[User] (AccountName, HashedPassword, Salt)
---    VALUES ('Admin', @HashedPassword, @Salt);
---END
+﻿USE [AbiaServerDB]
+IF NOT EXISTS (SELECT * FROM [worlds] WHERE [name] = 'Bekhora')
+BEGIN
+    INSERT INTO [worlds] ([name], [ip], [port])
+    VALUES ('Bekhora', 127001, 4299)
+END

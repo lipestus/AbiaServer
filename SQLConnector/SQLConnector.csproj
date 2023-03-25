@@ -56,10 +56,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\IUserData.cs" />
+    <Compile Include="Data\IWorldData.cs" />
     <Compile Include="Data\UserData.cs" />
+    <Compile Include="Data\WorldData.cs" />
     <Compile Include="DbAccess\ISqlDataAccess.cs" />
     <Compile Include="DbAccess\SqlDataAccess.cs" />
     <Compile Include="Models\UserModel.cs" />
+    <Compile Include="Models\WorldModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -94,12 +97,12 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\SQLConnector.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Plugins"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Konscious.Security.Cryptography.Argon2.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Memory.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Konscious.Security.Cryptography.Blake2.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Numerics.Vectors.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"
-xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Dapper.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\Server\Lib"</PostBuildEvent>
+    <PostBuildEvent>xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\SQLConnector.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Plugins"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Konscious.Security.Cryptography.Argon2.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Memory.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Konscious.Security.Cryptography.Blake2.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Numerics.Vectors.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll" C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"
+xcopy /y "$(SolutionDir)SQLConnector\bin\Debug\Dapper.dll" "C:\Users\lipes\OneDrive\Documents\GitHub\Abia\CentralServer\Lib"</PostBuildEvent>
   </PropertyGroup>
 </Project>

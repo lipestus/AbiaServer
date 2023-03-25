@@ -25,6 +25,7 @@ namespace AbiaServer
         private DatabaseLoader _databaseLoader;
         private AccountManager _accountManager;
         private ClientRegistry _clientRegistry;
+        private WorldManager _worldManager;
         public AbiaServer(PluginLoadData pluginLoadData) : base(pluginLoadData)
         {
             try
@@ -39,6 +40,7 @@ namespace AbiaServer
             InitialiseListeners();
             _databaseLoader = new DatabaseLoader(_configLoader.Config);
             _accountManager = new AccountManager(_databaseLoader.UserData);
+            _worldManager = new WorldManager(_databaseLoader.WorldData);
             _clientRegistry = new ClientRegistry();
         }
 
@@ -73,6 +75,9 @@ namespace AbiaServer
                     break;
                 case (ushort)Tags.MessageTypes.LoginRequest:
                     await _accountManager.OnLoginRequest(e);
+                    break;
+                case (ushort)Tags.MessageTypes.WorldRequest:
+                    await _worldManager.OnWorldRequest(e);
                     break;
             }
         }
